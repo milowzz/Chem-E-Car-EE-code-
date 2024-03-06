@@ -42,7 +42,7 @@ void loop() {
 
   //Always have the white LED on 
   digitalWrite(WhiteLed, HIGH);
-  //digitalWrite(Relaypin, LOW);
+  
 
  
 if(switchValue == 1){
@@ -60,7 +60,7 @@ digitalWrite(Relaypin, LOW);
 if(lightVal > 500){
 digitalWrite(RedLed, HIGH);
 digitalWrite(GreenLed, LOW);
-//digitalWrite(Relaypin, HIGH);
+
 }
   else { 
   digitalWrite(GreenLed, HIGH);
