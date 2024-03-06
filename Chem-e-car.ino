@@ -21,11 +21,12 @@ void setup() {
   Serial.begin(9600);
   pinMode(lightPen, INPUT);
   pinMode(switchpin, INPUT);
-  digitalWrite(switchpin, HIGH);
   pinMode(WhiteLed, OUTPUT);
   pinMode(GreenLed, OUTPUT);
   pinMode(RedLed, OUTPUT);
   pinMode(Relaypin, OUTPUT);
+  
+  digitalWrite(switchpin, HIGH);
 
   myservo.attach(servopin);
 
@@ -33,35 +34,37 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  switchValue = digitalRead(switchpin);
-  Serial.println(switchValue);
+  switchValue = digitalRead(switchpin); //read in the voltage value from the switch
+  Serial.println(switchValue); // this is unessarcy, but good practice to check if the adruino is keeping up the signal
 
-  lightVal = analogRead(lightPen);
-  Serial.println(lightVal);
-  delay(dv);
+  lightVal = analogRead(lightPen); // read in the voltage of the photoresistor 
+  Serial.println(lightVal);       // print the value to the serial monitor 
+  delay(dv);                      // 250milisec 
 
   //Always have the white LED on 
   digitalWrite(WhiteLed, HIGH);
   
 
- 
-if(switchValue == 1){
+// if the switch is off, have the servo stay in starting position and have the relay off
+if(switchValue == 1){      
 myservo.write(60); // STARTING POSTION OF SERVO MOTOR
 digitalWrite(Relaypin, LOW);
 }
-
-  else{
+  //when the switch is flipped turn on the relay, which will connect the battery and motor, also turns the servo so that it pushes on the syringe to begin reaction
+  else{ 
   digitalWrite(Relaypin, HIGH);
   myservo.write(155); //If button is pressed I.E circuit connects, then turn the servo motor and NOTE: also filp the relay on too
   }
 
 
-  //if light val is over some value, then change the position of the motor
+// STARTING SEQUENCE, the light passing through the beaker via led will be recorded, At this time the RED led will be on
 if(lightVal > 500){
 digitalWrite(RedLed, HIGH);
 digitalWrite(GreenLed, LOW);
 
 }
+  // once the reaction happens, lightval will decrease and then cut the relay from the battery and stop the car as a whole. 
+  //The LED will turn green to confirm this occured 
   else { 
   digitalWrite(GreenLed, HIGH);
   digitalWrite(RedLed,LOW );
