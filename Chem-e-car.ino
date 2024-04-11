@@ -44,7 +44,7 @@ digitalWrite(WhiteLed, HIGH); // white LED ON
  
 /* I added this due to the issue that we want the car to run automatcally however, I previosuly had the condition that if the photoresistor was under or below a value it would
 either turn on or off the relay is proved to be a bad idea because in order for the car to run, it would have to depend and wait on the photoresistor to show a value.
-Instead, the boolean statements allow the car to run independently as long as its conditon remind true. It will only change if the photoresistor is less than 500 
+Instead, the boolean statements allow the car to run independently as long as its conditon remains true. It will only change if the photoresistor is less than 500 
 (the reaction has occured) and as a reuslt the car will stop. 
 */
 if(on){
