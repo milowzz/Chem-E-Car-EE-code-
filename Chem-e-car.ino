@@ -67,7 +67,7 @@ Serial.println(lightVal);
  
 // Once the solutions are settled, have the photoresistor begin to record the lught passing through the beaker
 // Once the reaction occurs do the following:
-if(lightVal > 500){
+if(lightVal > 200){
 digitalWrite(RedLed, HIGH);
 digitalWrite(GreenLed, LOW);
 myservo.write(100);          // turn servo arm to position 100 (push down)
