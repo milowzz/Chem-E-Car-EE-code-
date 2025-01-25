@@ -1,2 +1,2 @@
 # Chem-E-Car-EE-code-
-This is the code that programmed all of the components for the 2024 chem e car competition 
+This is the code that programms the car (as of 1/25/25)
