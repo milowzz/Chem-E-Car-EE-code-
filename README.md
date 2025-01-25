@@ -1,2 +1,2 @@
 # Chem-E-Car-EE-code-
-This is the code that programms the car (as of 1/25/25)
+This is the code that programs the car (as of 1/25/25)
