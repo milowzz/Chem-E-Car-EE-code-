@@ -34,45 +34,42 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
-
-//Always have the circuit do the following:
+//Always have the white LED ON
 digitalWrite(WhiteLed, HIGH); // white LED ON
 
 
  
-/* I added this due to the issue that we want the car to run automatcally however, I previosuly had the condition that if the photoresistor was under or below a value it would
-either turn on or off the relay is proved to be a bad idea because in order for the car to run, it would have to depend and wait on the photoresistor to show a value.
-Instead, the boolean statements allow the car to run independently as long as its conditon remains true. It will only change if the photoresistor is less than 500 
-(the reaction has occured) and as a reuslt the car will stop. 
+/* I added this since I previously had the condition that if the photoresistor was over or below a value it would
+either turn on or off the relay. Instead, I made the "on" bool so that once the reaction occured the car can turn off. 
 */
 if(on){
 digitalWrite(Relaypin, HIGH);
 myservo.write(SERVO_ENDPOS);
 }
   else{
-  digitalWrite(Relaypin, LOW);
-  myservo.write(SERVO_STARTPOS);
+  digitalWrite(Relaypin, LOW);  // stops the car
+  myservo.write(SERVO_STARTPOS); // servo goes to its original position 
    }
   
 
-  // have this delay so that the solutions have time to settle down before recording the light value from the photoresistor, this time is NOT confirmed yet
+/*  delay is so that the solutions have time to settle down before recording the light value from the photoresistor, 
+  otherwise this would go below the lightval threshold of 150
+*/
 delay(3000); 
 
-lightVal = analogRead(lightPen);
-Serial.println(lightVal);
+lightVal = analogRead(lightPen); // records photoresistor 
+Serial.println(lightVal); 
 
-//myservo.write(SERVO_STARTPOS);   might or might not need this           
+//myservo.write(SERVO_STARTPOS);  used testing/debugging purposes        
  
-// Once the solutions are settled, have the photoresistor begin to record the lught passing through the beaker
-// Once the reaction occurs do the following:
-if(lightVal > 200){
+// Once the solutions are settled (after 3 secs), have the photoresistor begin to record the light passing through the beaker
+if(lightVal > 150){
 digitalWrite(RedLed, HIGH);
 digitalWrite(GreenLed, LOW);
 myservo.write(100);          // turn servo arm to position 100 (push down)
 }
-
+  // Once the reaction occurs do the following:
   else { 
   digitalWrite(GreenLed, HIGH);
   digitalWrite(RedLed,LOW );
